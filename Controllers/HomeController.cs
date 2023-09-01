@@ -18,13 +18,14 @@ namespace Squeezer.Controllers
             return View();
         }
         
+        [HttpPost]
         [Route("/Squeeze")]
-        public IActionResult Squeeze([FromBody][Url]string url)
+        public IActionResult Squeeze([Url]string url)
         {
             if(ModelState.IsValid)
             {
                 string shortenedURL = UrlShortener.Shorten(url);
-                return Content(shortenedURL);
+                return View("Result", shortenedURL);
             }
             return RedirectToAction("Index");
         }
