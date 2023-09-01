@@ -25,7 +25,8 @@ namespace Squeezer.Controllers
             if(ModelState.IsValid)
             {
                 string shortenedURL = UrlShortener.Shorten(url);
-                return View("Result", shortenedURL);
+                string domain = HttpContext.Request.Host.Value;
+                return View("Result", $"{domain}/{shortenedURL}");
             }
             return RedirectToAction("Index");
         }
