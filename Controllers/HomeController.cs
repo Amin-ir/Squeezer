@@ -46,7 +46,9 @@ namespace Squeezer.Controllers
             }
             //Remember to add a partial view for this idea : what partial view? the <div> element inputs are in! take it out of layout
             //Because i want user dashboard to have the background of the main layout. only a .5-opacity div as a container for user's data
-            return View("/");
+            ViewBag.Errors = ModelState.GetModelErrorTexts();
+            return View("Index");
         }
     }
+    
 }
