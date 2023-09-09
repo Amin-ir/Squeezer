@@ -1,7 +1,4 @@
-﻿using Squeezer.Services.Encoder;
-using Squeezer.Services.Encryptor;
-
-namespace Squeezer.Services.URLShortener
+﻿namespace Squeezer.Services
 {
     public class SqueezerURLShortener : IURLShortener
     {

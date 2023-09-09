@@ -1,4 +1,4 @@
-﻿namespace Squeezer.Services.URLShortener
+﻿namespace Squeezer.Services
 {
     public interface IURLShortener
     {

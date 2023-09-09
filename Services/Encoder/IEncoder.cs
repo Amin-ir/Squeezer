@@ -1,4 +1,4 @@
-﻿namespace Squeezer.Services.Encoder
+﻿namespace Squeezer.Services
 {
     public interface IEncoder
     {

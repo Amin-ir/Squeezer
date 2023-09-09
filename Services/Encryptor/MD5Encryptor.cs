@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Squeezer.Services.Encryptor
+namespace Squeezer.Services
 {
     public class MD5Encryptor : IEncryptor
     {
@@ -14,6 +14,11 @@ namespace Squeezer.Services.Encryptor
                 resultBytes = grapher.ComputeHash(bytes);
             }
             return resultBytes;
+        }
+        public string EncryptToString(object input)
+        {
+            byte[] byteHash = Encrypt(input);
+            return Encoding.UTF8.GetString(byteHash);
         }
     }
 }
