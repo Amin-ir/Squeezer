@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Squeezer.Services.URLShortener;
-using System.ComponentModel.DataAnnotations;
+using Squeezer.Models;
+using Squeezer.Services;
 
 namespace Squeezer.Controllers
 {
     public class HomeController : Controller
     {
-        IURLShortener UrlShortener;
-        public HomeController(IURLShortener urlShortener)
+        URLManager URLManager;
+        public HomeController(URLManager urlManager)
         {
-            UrlShortener = urlShortener;
+            URLManager = urlManager;
         }
 
         [Route("/")]
@@ -18,17 +18,35 @@ namespace Squeezer.Controllers
             return View();
         }
         
+        [Route("/Signup")]
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+        
+        [Route("/SignIn")]
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+        
         [HttpPost]
         [Route("/Squeeze")]
-        public IActionResult Squeeze([Url]string url)
+        public IActionResult Squeeze([FromForm]Url url)
         {
             if(ModelState.IsValid)
             {
-                string shortenedURL = UrlShortener.Shorten(url);
+                url = URLManager.Create(url);
+
                 string domain = HttpContext.Request.Host.Value;
-                return View("Result", $"{domain}/{shortenedURL}");
+
+                url.ShortenedUrl = $"{domain}/{url.ShortenedUrl}";
+
+                return View("Result", url);
             }
-            return RedirectToAction("Index");
+            //Remember to add a partial view for this idea : what partial view? the <div> element inputs are in! take it out of layout
+            //Because i want user dashboard to have the background of the main layout. only a .5-opacity div as a container for user's data
+            return View("/");
         }
     }
 }
