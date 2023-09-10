@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Squeezer.Infrastructure;
 using Squeezer.Services;
+using Squeezer.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.Add(urlManagerServiceDescriptor);
 
 builder.Services.AddDbContext<SqueezerDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));
+
+builder.Services.Configure<RouteOptions>(option => option.ConstraintMap.Add("shortUrlConstraint", typeof(ShortUrlRouteContstraint)));
 
 var app = builder.Build();
 

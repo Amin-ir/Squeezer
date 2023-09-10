@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Squeezer.Models;
 using Squeezer.Services;
+using Squeezer.Utils;
 
 namespace Squeezer.Controllers
 {
@@ -49,6 +50,19 @@ namespace Squeezer.Controllers
             ViewBag.Errors = ModelState.GetModelErrorTexts();
             return View("Index");
         }
+
+        [Route("/{shortUrl:shortUrlConstraint}")]
+        public IActionResult UnSqueeze(string shortUrl)
+        {
+            try
+            {
+                string originalUrl = URLManager.GetOriginalUrl(shortUrl);
+                return Redirect(originalUrl);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
-    
 }

@@ -26,5 +26,12 @@ namespace Squeezer.Services
 
             return encodedArray;
         }
+        public bool IsEncoded(object input)
+        {
+            bool result = true;
+            if (input.ToString().Any(character => !Base62Domain.Contains(character)))
+                result = false;
+            return result;
+        }
     }
 }

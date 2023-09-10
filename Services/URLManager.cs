@@ -47,5 +47,9 @@ namespace Squeezer.Services
         {
             return db.Urls.Where(url => (userId.HasValue) ? url.UserId == userId : true).ToList();
         }
+        public string GetOriginalUrl(string shortUrl)
+        {
+            return db.Urls.First(url => url.ShortenedUrl == shortUrl).OriginalUrl;
+        }
     }
 }

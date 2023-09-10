@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Squeezer.Services
+namespace Squeezer.Utils
 {
     public static class MyExtensions
     {
