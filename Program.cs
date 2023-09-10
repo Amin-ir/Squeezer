@@ -15,6 +15,10 @@ var urlManagerServiceDescriptor = new ServiceDescriptor
     (typeof(URLManager), typeof(URLManager), ServiceLifetime.Transient);
 builder.Services.Add(urlManagerServiceDescriptor);
 
+var userManagerServiceDescriptor = new ServiceDescriptor
+    (typeof(UserManager), typeof(UserManager), ServiceLifetime.Transient);
+builder.Services.Add(userManagerServiceDescriptor);
+
 builder.Services.AddDbContext<SqueezerDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));
 
