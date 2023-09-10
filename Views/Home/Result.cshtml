@@ -1,9 +1,11 @@
 ﻿@{
     ViewBag.Title = "URL Generated!";
 }
-<p style="font-size:20px; color:white;">Short URL Generated: </p>
-<div style="padding: 10px 100px 10px 100px; display:inline-block; background-color: white; border-radius: 20px;" class="mb-2">
-    <p style="font-size:30px; margin:0;">@Model.ShortenedUrl</p>
+<div class="white-rounded-container">
+    <p style="font-size:20px; color:white;">Short URL Generated: </p>
+    <div style="padding: 10px 100px 10px 100px; display:inline-block; background-color: white; border-radius: 20px;" class="mb-2">
+        <p style="font-size:30px; margin:0;">@Model.ShortenedUrl</p>
+    </div>
+    <p style="font-size:20px; color:white;"><a href="/signup" style="text-decoration:none; font-size:20px;">Sign Up</a> to store/review your generated URLs!</p>
+    <a class="btn btn-success col-6 pt-2 pb-2" href="/">Generate More!</a>
 </div>
-<p style="font-size:20px; color:white;"><a href="/signup" style="text-decoration:none; font-size:20px;">Sign Up</a> to store/review your generated URLs!</p>
-<a class="btn btn-success col-6 pt-2 pb-2" href="/">Generate More!</a>

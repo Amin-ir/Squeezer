@@ -73,6 +73,11 @@ p {
     flex-direction: column;
 }
 
+.white-rounded-container {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 30px 200px 30px 200px;
+    border-radius: 200px;
+}
 /* Animation */
 
 .parallax > use {

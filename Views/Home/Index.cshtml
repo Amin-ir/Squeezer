@@ -1,29 +1,31 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
-<form action="/Squeeze" method="post">
-    <div class="col-12 flex-column">
-        <div class="mb-3">
-            <label for="OriginalUrl" style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter your URL: </label>
-        </div>
-        <div>
-            <input name="OriginalUrl" placeholder="https://example.com" class="form-control" style="padding: 20px 100px 20px 100px; border-radius: 50px;" />
-        </div>
-        @{
-            if (ViewBag.Errors != null)
-            {
-                <ul>
-                    @{
-                        foreach (string error in ViewBag.Errors)
-                        {
-                            <li style="color:red;">@error</li>
+<div class="white-rounded-container">
+    <form action="/Squeeze" method="post">
+        <div class="col-12 flex-column">
+            <div class="mb-3">
+                <label for="OriginalUrl" style="font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter your URL: </label>
+            </div>
+            <div>
+                <input name="OriginalUrl" placeholder="https://example.com" class="form-control" style="padding: 20px 100px 20px 100px; border-radius: 50px;" />
+            </div>
+            @{
+                if (ViewBag.Errors != null)
+                {
+                    <ul>
+                        @{
+                            foreach (string error in ViewBag.Errors)
+                            {
+                                <li style="color:red;">@error</li>
+                            }
                         }
-                    }
-                </ul>    
+                    </ul>    
+                }
             }
-        }
-        <div>
-            <button type="submit" class="btn btn-danger col-8" style="font-size: 17px; padding: 15px 20px 15px 20px; margin-top: 10px; border-radius: 50px;">Squeeze!</button>
+            <div>
+                <button type="submit" class="btn btn-danger col-8" style="font-size: 17px; padding: 15px 20px 15px 20px; margin-top: 10px; border-radius: 50px;">Squeeze!</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
