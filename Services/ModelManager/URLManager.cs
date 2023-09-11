@@ -3,7 +3,7 @@ using Squeezer.Models;
 
 namespace Squeezer.Services
 {
-    public class URLManager
+    public class URLManager : IModelManager<Url>
     {
         SqueezerDbContext db;
         IURLShortener UrlShortener;
@@ -18,7 +18,7 @@ namespace Squeezer.Services
             url.ShortenedUrl = shortenedPath;
             url.DateAdded = DateTime.Now;
 
-            while (IsUrlDuplicate(url))
+            while (IsDuplicate(url))
                 url.ShortenedUrl += Random.Shared.Next(maxValue: 10);
 
             db.Add(url);
@@ -26,7 +26,7 @@ namespace Squeezer.Services
             
             return url;
         }
-        private bool IsUrlDuplicate(Url url)
+        public bool IsDuplicate(Url url)
         {
             return db.Urls.Any(urlRecord => urlRecord.ShortenedUrl == url.ShortenedUrl);
         }
