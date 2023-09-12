@@ -14,5 +14,9 @@ namespace Squeezer.Utils
 
             return errorTexts;
         }
+        public static string GetHostDomain(this HttpContext context)
+        {
+            return context.Request.Host.Value;
+        }
     }
 }

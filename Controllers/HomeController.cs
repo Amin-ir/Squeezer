@@ -39,9 +39,7 @@ namespace Squeezer.Controllers
             {
                 url = URLManager.Create(url);
 
-                string domain = HttpContext.Request.Host.Value;
-
-                url.ShortenedUrl = $"{domain}/{url.ShortenedUrl}";
+                url.ShortenedUrl = $"{HttpContext.GetHostDomain()}/{url.ShortenedUrl}";
 
                 return View("Result", url);
             }
