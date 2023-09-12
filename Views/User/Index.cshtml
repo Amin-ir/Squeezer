@@ -1,1 +1,31 @@
-﻿DASHBOARD
+﻿@model Squeezer.ViewModels.UrlListViewModel
+<div>
+    <a style="float:right; color:white;" class="btn btn-warning p-2 m-1" href="/">Shorten new URL</a>
+</div>
+<table class="table table-responsive-md table-hover table-bordered caption-top">
+    <thead>
+        <tr class="table-dark">
+            <th>Original URL</th>
+            <th>Shortened URL</th>
+            <th>Date Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var url in Model.Urls)
+            {
+                <tr>
+                    @{
+                        string originalUrlPresentation = url.OriginalUrl.Length >= 30 ?
+                            url.OriginalUrl.Substring(0, 30) + "..." : url.OriginalUrl; 
+                    }
+                    <td title="@url.OriginalUrl">@originalUrlPresentation</td>
+                    <td>@url.ShortenedUrl</td>
+                    <td>@url.DateAdded</td>
+                    <td><a class="btn btn-success p-1" target="_blank" href="@url.OriginalUrl">Visit the link</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -6,17 +6,20 @@ namespace Squeezer.Services
     public class URLManager : IModelManager<Url>
     {
         SqueezerDbContext db;
+        IAuthenticator Authenticator;
         IURLShortener UrlShortener;
-        public URLManager(SqueezerDbContext db, IURLShortener urlShortener)
+        public URLManager(SqueezerDbContext db, IURLShortener urlShortener, IAuthenticator authenticator)
         {
             this.db = db;
             UrlShortener = urlShortener;
+            Authenticator = authenticator;
         }
         public Url Create(Url url)
         {
             string shortenedPath = UrlShortener.Shorten(url.OriginalUrl);
             url.ShortenedUrl = shortenedPath;
             url.DateAdded = DateTime.Now;
+            url.UserId = Authenticator.IsAuthenticated() ? Authenticator.GetId() : null;
 
             while (IsDuplicate(url))
                 url.ShortenedUrl += Random.Shared.Next(maxValue: 10);

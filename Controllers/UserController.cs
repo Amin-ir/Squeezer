@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
-using Squeezer.Infrastructure;
 using Squeezer.Models;
 using Squeezer.Services;
-using System.Security.Claims;
+using Squeezer.Utils;
+using Squeezer.ViewModels;
 
 namespace Squeezer.Controllers
 {
@@ -12,23 +11,33 @@ namespace Squeezer.Controllers
     public class UserController : Controller
     {
         UserManager UserManager;
+        URLManager UrlManager;
         IAuthenticator Authenticator;
-        public UserController(UserManager userManager, IAuthenticator authenticator)
+        public UserController(UserManager userManager, URLManager urlManager, IAuthenticator authenticator)
         {
             UserManager = userManager;
             Authenticator = authenticator;
+            UrlManager = urlManager;
         }
 
         [Authorize(Policy = "UserAccessible")]
         [Route("/Dashboard")]
         public IActionResult Index()
         {
-            return View();
+            int userId = Authenticator.GetId();
+            UrlListViewModel model = new UrlListViewModel
+            {
+                Urls = UrlManager.Get(userId).ToList()
+            };
+
+            string domain = HttpContext.GetHostDomain();
+            model.Urls.ForEach(url => url.ShortenedUrl = $"{domain}/{url.ShortenedUrl}");
+
+            return View(model);
         }
 
         public IActionResult SignUp()
         {
-            var u = User;
             if (Authenticator.IsAuthenticated())
                 return RedirectToAction("Index");
             return View();

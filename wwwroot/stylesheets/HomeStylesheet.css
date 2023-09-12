@@ -78,6 +78,10 @@ p {
     padding: 30px 200px 30px 200px;
     border-radius: 200px;
 }
+
+table *{
+    text-align:center;
+}
 /* Animation */
 
 .parallax > use {
