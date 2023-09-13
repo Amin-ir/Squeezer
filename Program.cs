@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Squeezer.Components.ProfileBadge;
 using Squeezer.Infrastructure;
 using Squeezer.Services;
 using Squeezer.Utils;
@@ -28,6 +29,7 @@ builder.Services.AddTransient<URLManager, URLManager>();
 builder.Services.AddTransient<UserManager,UserManager>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IAuthenticator, ClaimBasedAuthenticator>();
+builder.Services.AddScoped<ProfileBadgeViewComponent>();
 
 builder.Services.AddDbContext<SqueezerDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));
