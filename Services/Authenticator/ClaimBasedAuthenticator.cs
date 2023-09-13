@@ -31,7 +31,7 @@ namespace Squeezer.Services
             await HttpContextAccessor.HttpContext.SignOutAsync();
             return null;
         }
-        public int GetId()
+        public int GetUserId()
         {
             var claimIdValue = HttpContextAccessor.HttpContext.User.FindFirst("Id")?.Value;
             return Convert.ToInt32(claimIdValue);

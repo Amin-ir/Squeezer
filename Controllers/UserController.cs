@@ -24,7 +24,7 @@ namespace Squeezer.Controllers
         [Route("/Dashboard")]
         public IActionResult Index()
         {
-            int userId = Authenticator.GetId();
+            int userId = Authenticator.GetUserId();
             UrlListViewModel model = new UrlListViewModel
             {
                 Urls = UrlManager.Get(userId).ToList()

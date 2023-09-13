@@ -7,6 +7,6 @@ namespace Squeezer.Services
         public bool IsAuthenticated();
         public Task<IActionResult> LogIn(int id);
         public Task<IActionResult> LogOut();
-        public int GetId();
+        public int GetUserId();
     }
 }

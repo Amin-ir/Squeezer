@@ -19,7 +19,7 @@ namespace Squeezer.Services
             string shortenedPath = UrlShortener.Shorten(url.OriginalUrl);
             url.ShortenedUrl = shortenedPath;
             url.DateAdded = DateTime.Now;
-            url.UserId = Authenticator.IsAuthenticated() ? Authenticator.GetId() : null;
+            url.UserId = Authenticator.IsAuthenticated() ? Authenticator.GetUserId() : null;
 
             while (IsDuplicate(url))
                 url.ShortenedUrl += Random.Shared.Next(maxValue: 10);
