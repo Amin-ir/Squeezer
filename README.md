@@ -2,7 +2,9 @@
 
 ![Capture](https://github.com/Amin-ir/Squeezer/assets/91383421/0ad5e193-087e-434a-b6eb-de71630c2f02)
 
-This is a simple URL shortening project built with .NET Core that also incorporates authentication using a claim-based approach. Note that this project is not intended for production use; it's primarily a training exercise and playground to test Docker files.
+## Overview
+
+Squeezer is a simple URL shortening project built with .NET Core that also incorporates authentication using a claim-based approach. Note that this project is not intended for production use; it's primarily a training exercise and playground to test Docker files.
 
 ## Features
 
@@ -61,6 +63,10 @@ To run this project, you need to have the following installed on your machine:
 
    - To use a shortened URL, simply enter it in your browser's address bar.
    - You will be redirected to the original long URL.
+
+## Shortening URL
+
+This project uses MD5 Encryption to shorten the link, and then encodes the output to Based-62, to make it readable to users.
 
 ## Authentication
 
