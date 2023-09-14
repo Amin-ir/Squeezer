@@ -35,7 +35,7 @@
             {
                 <div class="flex-column m-1">
                     <div class="p-1" style="font-size:15px; color:rebeccapurple">Signed As: @Model.Name</div>
-                    <div><a href="/user/signout" class="btn btn-danger p-2 mt-1 col-12">Sign Out</a></div>
+                    <div><a href="/user/signout" class="btn btn-danger p-2 mt-1 col-12" onclick="return confirm('Are sure to sign out?');">Sign Out</a></div>
                 </div>        
             }
         }
