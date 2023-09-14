@@ -52,7 +52,8 @@ namespace Squeezer.Controllers
                 Authenticator.LogIn(user.Id);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction();
+            ViewBag.Errors = ModelState.GetModelErrorTexts();
+            return View();
         }
 
         public IActionResult SignIn()
@@ -71,7 +72,8 @@ namespace Squeezer.Controllers
                 Authenticator.LogIn(userId);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction();
+            ViewBag.Errors = "Password or Email doesn't match";
+            return View();
         }
         public IActionResult SignOut()
         {

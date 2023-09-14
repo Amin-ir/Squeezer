@@ -16,6 +16,16 @@
             <div class="m-1">
                 <input class="form-control p-3" type="password" placeholder="********" name="password" />
             </div>
+            @{
+                if (ViewBag.Errors is not null)
+                {
+                    <div>
+                        <ul>
+                            <li style="color:red;">@ViewBag.Errors</li>
+                        </ul>
+                    </div>
+                }
+            }
             <div class="m-3">
                 <button type="submit" class="btn btn-primary" style="padding: 10px 45px 10px 45px;">Submit</button>
             </div>

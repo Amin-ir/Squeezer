@@ -25,6 +25,21 @@
             <div class="m-3">
                 <button type="submit" class="btn btn-primary" style="padding: 10px 45px 10px 45px;">Submit</button>
             </div>
+            @{
+                if (ViewBag.Errors is not null)
+                {
+                    <div>
+                        <ul>
+                            @{
+                                foreach (var error in ViewBag.Errors)
+                                {
+                                    <li style="color:red;">@error</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                }
+            }
             <div class="m-1">
                 Already signed up? <a href="/user/signin" style="text-decoration:none;">Sign in</a>!
             </div>
