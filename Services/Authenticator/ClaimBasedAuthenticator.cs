@@ -37,5 +37,10 @@ namespace Squeezer.Services
             var claimIdValue = HttpContextAccessor.HttpContext.User.FindFirst("Id")?.Value;
             return Convert.ToInt32(claimIdValue);
         }
+        public string GetUserRole()
+        {
+            string roleClaimValue = HttpContextAccessor.HttpContext.User.FindFirst("Role")?.Value;
+            return roleClaimValue;
+        }
     }
 }
