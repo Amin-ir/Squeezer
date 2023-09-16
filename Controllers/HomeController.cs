@@ -18,19 +18,7 @@ namespace Squeezer.Controllers
         {
             return View();
         }
-        
-        [Route("/Signup")]
-        public IActionResult SignUp()
-        {
-            return View();
-        }
-        
-        [Route("/SignIn")]
-        public IActionResult SignIn()
-        {
-            return View();
-        }
-        
+
         [HttpPost]
         [Route("/Squeeze")]
         public IActionResult Squeeze([FromForm]Url url)
