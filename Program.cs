@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Squeezer.Components.ProfileBadge;
 using Squeezer.Infrastructure;
+using Squeezer.Models;
 using Squeezer.Services;
 using Squeezer.Utils;
 
@@ -17,7 +18,8 @@ builder.Services.AddAuthentication(option =>
 
 builder.Services.AddAuthorization(option =>
 {
-    option.AddPolicy("UserAccessible", policy => policy.RequireClaim("Role", "SignedUser"));
+    option.AddPolicy("UserAccessible", policy => policy.RequireClaim
+    ("Role", new List<string> { UserRole.Admin.ToString(), UserRole.TypicalUser.ToString() } ));
 });
 
 builder.Services.AddControllersWithViews();

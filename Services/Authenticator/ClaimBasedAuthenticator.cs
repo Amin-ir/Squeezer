@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Squeezer.Models;
 using System.Security.Claims;
 
 namespace Squeezer.Services
@@ -15,11 +16,11 @@ namespace Squeezer.Services
         public bool IsAuthenticated() 
         {
             string? roleClaimValue = HttpContextAccessor.HttpContext?.User.FindFirst("Role")?.Value;
-            return roleClaimValue == "SignedUser" || roleClaimValue == "Admin";
+            return roleClaimValue == UserRole.Admin.ToString() || roleClaimValue == UserRole.TypicalUser.ToString();
         }
-        public async Task<IActionResult> LogIn(int id)
+        public async Task<IActionResult> LogIn(User user)
         {
-            var claims = new List<Claim> { new Claim("Role", "SignedUser"), new Claim("Id", id.ToString()) };
+            var claims = new List<Claim> { new Claim("Role", user.UserRole.ToString()), new Claim("Id", user.Id.ToString()) };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 

@@ -35,7 +35,6 @@ namespace Squeezer.Controllers
 
             return View(model);
         }
-
         public IActionResult SignUp()
         {
             if (Authenticator.IsAuthenticated())
@@ -53,12 +52,11 @@ namespace Squeezer.Controllers
             else
             {
                 user = UserManager.Create(user);
-                Authenticator.LogIn(user.Id);
+                Authenticator.LogIn(user);
                 return RedirectToAction("Index");
             }
             return View();
         }
-
         public IActionResult SignIn()
         {
             if (Authenticator.IsAuthenticated())
@@ -71,8 +69,8 @@ namespace Squeezer.Controllers
         {
             if(UserManager.IsCredentialsValid(user))
             {
-                int userId = UserManager.GetId(user.Email);
-                Authenticator.LogIn(userId);
+                user = UserManager.Get(user.Email);
+                Authenticator.LogIn(user);
                 return RedirectToAction("Index");
             }
             ViewBag.Errors = "Password or Email doesn't match";

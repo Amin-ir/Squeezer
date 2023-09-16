@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Squeezer.Models
 {
+    [Index(nameof(Email), IsUnique = true)]
     public class User
     {
         [Required]
@@ -14,5 +16,6 @@ namespace Squeezer.Models
         [MaxLength(30)]
         [MinLength(5)]
         public string Password { get; set; }
+        public UserRole UserRole { get; set; } = UserRole.TypicalUser;
     }
 }
