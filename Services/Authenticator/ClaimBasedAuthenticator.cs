@@ -9,14 +9,15 @@ namespace Squeezer.Services
     public class ClaimBasedAuthenticator : IAuthenticator
     {
         IHttpContextAccessor HttpContextAccessor;
+        string[] ValidRoles = { UserRole.Admin.ToString(), UserRole.TypicalUser.ToString() };
         public ClaimBasedAuthenticator(IHttpContextAccessor httpContextAccessor)
         {
             HttpContextAccessor = httpContextAccessor;
         }
         public bool IsAuthenticated() 
         {
-            string? roleClaimValue = HttpContextAccessor.HttpContext?.User.FindFirst("Role")?.Value;
-            return roleClaimValue == UserRole.Admin.ToString() || roleClaimValue == UserRole.TypicalUser.ToString();
+            string userRole = GetUserRole();
+            return ValidRoles.Contains(userRole);
         }
         public async Task<IActionResult> LogIn(User user)
         {
