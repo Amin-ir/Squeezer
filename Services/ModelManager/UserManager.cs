@@ -15,7 +15,6 @@ namespace Squeezer.Services
         public User Create(User user)
         {
             user.Password = Encryptor.EncryptToString(user.Password);
-            
             db.Add(user);
             db.SaveChanges();
             
@@ -29,13 +28,17 @@ namespace Squeezer.Services
         {
             return db.Users.Where(user => id.HasValue ? user.Id == id : true).ToList();
         }
-        public int GetId(string email)
+        public User Get(string email)
         {
-            return db.Users.First(user => user.Email == email).Id;
+            return db.Users.First(user => user.Email == email);
         }
         public bool IsCredentialsValid(User user)
         {
             return db.Users.Any(_user => _user.Email == user.Email && Encryptor.EncryptToString(user.Password) == _user.Password);
+        }
+        public UserRole GetRole(int id)
+        {
+            return Get(id).First().UserRole;
         }
     }
 }
