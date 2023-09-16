@@ -1,0 +1,26 @@
+﻿@model List<Squeezer.ViewModels.UsersAdminViewModel>
+<table class="table table-responsive-md table-hover table-bordered caption-top">
+    <thead>
+        <tr class="table-dark">
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Date Registered</th>
+            <th>URLs Generated Count</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.User.Name</td>
+                    <td>@user.User.Email</td>
+                    <td>@user.User.DateRegistered</td>
+                    <td>@user.GeneratedUrlCount</td>
+                    <td><a href="/user/@user.User.Id" class="btn btn-success">Review URLs</a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

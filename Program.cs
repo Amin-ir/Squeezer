@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Squeezer.Components.ProfileBadge;
+using Squeezer.Components;
 using Squeezer.Infrastructure;
 using Squeezer.Models;
 using Squeezer.Services;
@@ -20,6 +20,9 @@ builder.Services.AddAuthorization(option =>
 {
     option.AddPolicy("UserAccessible", policy => policy.RequireClaim
     ("Role", new List<string> { UserRole.Admin.ToString(), UserRole.TypicalUser.ToString() } ));
+    
+    option.AddPolicy("AdminOnly", policy => policy.RequireClaim
+    ("Role", UserRole.Admin.ToString()));
 });
 
 builder.Services.AddControllersWithViews();
@@ -31,7 +34,6 @@ builder.Services.AddTransient<URLManager, URLManager>();
 builder.Services.AddTransient<UserManager,UserManager>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IAuthenticator, ClaimBasedAuthenticator>();
-builder.Services.AddScoped<ProfileBadgeViewComponent>();
 
 builder.Services.AddDbContext<SqueezerDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));

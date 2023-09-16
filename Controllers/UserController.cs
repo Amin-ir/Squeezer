@@ -87,5 +87,21 @@ namespace Squeezer.Controllers
             Authenticator.LogOut();
             return RedirectToAction("SignIn");
         }
+        [Authorize(Policy = "AdminOnly")]
+        public IActionResult List()
+        {
+            var usersList = GetUsersAdminViewModel();
+            return View(usersList);
+        }
+        IEnumerable<UsersAdminViewModel> GetUsersAdminViewModel()
+        {
+            List<UsersAdminViewModel> users = new List<UsersAdminViewModel>();
+            foreach (var user in UserManager.GetAll().ToList())
+            {
+                var userViewModel = new UsersAdminViewModel(user, UrlManager.GetUrlCountByUser(user.Id));
+                users.Add(userViewModel);
+            }
+            return users;
+        }
     }
 }
