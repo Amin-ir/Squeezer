@@ -82,6 +82,12 @@ p {
 table *{
     text-align:center;
 }
+
+.dark-blue-ring {
+    border-style:solid; 
+    border-color:darkslateblue; 
+    border-radius:100px;
+}
 /* Animation */
 
 .parallax > use {
