@@ -24,21 +24,26 @@ namespace Squeezer.Services
         {
             return db.Users.Any(_user => _user.Email == user.Email);
         }
-        public List<User> Get(int? id)
+        public User Get(int id)
         {
-            return db.Users.Where(user => id.HasValue ? user.Id == id : true).ToList();
+            return db.Users.First(user => user.Id == id);
         }
         public User Get(string email)
         {
             return db.Users.First(user => user.Email == email);
         }
+        public IEnumerable<User> GetAll()
+        {
+            return db.Users;
+        }
         public bool IsCredentialsValid(User user)
         {
-            return db.Users.Any(_user => _user.Email == user.Email && Encryptor.EncryptToString(user.Password) == _user.Password);
+            return db.Users.Any
+                (_user => _user.Email == user.Email && Encryptor.EncryptToString(user.Password) == _user.Password);
         }
         public UserRole GetRole(int id)
         {
-            return Get(id).First().UserRole;
+            return Get(id).UserRole;
         }
     }
 }

@@ -46,13 +46,25 @@ namespace Squeezer.Services
                 return false;
             }
         }
-        public List<Url> Get(int? userId)
+        public Url Get(int Id)
         {
-            return db.Urls.Where(url => (userId.HasValue) ? url.UserId == userId : true).ToList();
+            return db.Urls.First(url => url.Id == Id);
+        }
+        public IEnumerable<Url> GetByUser(int userId)
+        {
+            return db.Urls.Where(url => url.UserId == userId);
+        }
+        public IEnumerable<Url> GetAll()
+        {
+            return db.Urls;
         }
         public string GetOriginalUrl(string shortUrl)
         {
             return db.Urls.First(url => url.ShortenedUrl == shortUrl).OriginalUrl;
+        }
+        public int GetUrlCountByUser(int userId)
+        {
+            return db.Urls.Count(url => url.UserId == userId);
         }
     }
 }

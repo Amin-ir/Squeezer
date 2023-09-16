@@ -24,16 +24,22 @@ namespace Squeezer.Controllers
         [Route("/Dashboard")]
         public IActionResult Index()
         {
+            var Urls = GetUrlsViewModel();
+            return View(Urls);
+        }
+
+        UrlListViewModel GetUrlsViewModel()
+        {
             int userId = Authenticator.GetUserId();
             UrlListViewModel model = new UrlListViewModel
             {
-                Urls = UrlManager.Get(userId).ToList()
+                Urls = UrlManager.GetByUser(userId).ToList()
             };
 
             string domain = HttpContext.GetHostDomain();
             model.Urls.ForEach(url => url.ShortenedUrl = $"{domain}/{url.ShortenedUrl}");
 
-            return View(model);
+            return model;
         }
         public IActionResult SignUp()
         {

@@ -2,7 +2,7 @@
 using Squeezer.Services;
 using System.Security.Claims;
 
-namespace Squeezer.Components.ProfileBadge
+namespace Squeezer.Components
 {
     public class ProfileBadgeViewComponent : ViewComponent
     {
@@ -19,7 +19,7 @@ namespace Squeezer.Components.ProfileBadge
             if(Authenticator.IsAuthenticated())
             {
                 int userId = Authenticator.GetUserId();
-                var user = UserManager.Get(userId).First();
+                var user = UserManager.Get(userId);
                 return View(user);
             }
             return View();
