@@ -46,13 +46,16 @@ namespace Squeezer.Controllers
         [HttpPost]
         public IActionResult SignUp([FromForm]User user)
         {
-            if (ModelState.IsValid)
+            if (UserManager.IsDuplicate(user))
+                ViewBag.Errors = new List<string> { "A user with the same Email already exists." };
+            else if (!ModelState.IsValid)
+                ViewBag.Errors = ModelState.GetModelErrorTexts();
+            else
             {
                 user = UserManager.Create(user);
                 Authenticator.LogIn(user.Id);
                 return RedirectToAction("Index");
             }
-            ViewBag.Errors = ModelState.GetModelErrorTexts();
             return View();
         }
 
