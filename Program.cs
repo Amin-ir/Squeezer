@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Squeezer.Components;
 using Squeezer.Infrastructure;
 using Squeezer.Models;
 using Squeezer.Services;
@@ -30,8 +29,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEncryptor, MD5Encryptor>();
 builder.Services.AddTransient<IEncoder, Base62Encoder>();
 builder.Services.AddTransient<IURLShortener, SqueezerURLShortener>();
-builder.Services.AddTransient<URLManager, URLManager>();
-builder.Services.AddTransient<UserManager,UserManager>();
+builder.Services.AddTransient<URLManager>();
+builder.Services.AddTransient<UserManager>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IAuthenticator, ClaimBasedAuthenticator>();
 
