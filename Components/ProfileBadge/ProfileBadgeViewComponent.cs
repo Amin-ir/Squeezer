@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Squeezer.Services;
-using System.Security.Claims;
 
 namespace Squeezer.Components
 {
@@ -20,9 +19,10 @@ namespace Squeezer.Components
             {
                 int userId = Authenticator.GetUserId();
                 var user = UserManager.Get(userId);
+                ViewBag.HasSignedIn = true;
                 return View(user);
             }
-            return View();
+            return View(UserManager.GetEmptyUser());
         }
     }
 }

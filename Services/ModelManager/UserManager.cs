@@ -45,5 +45,9 @@ namespace Squeezer.Services
         {
             return Get(id).UserRole;
         }
+        public User GetEmptyUser()
+        {
+            return new User();
+        }
     }
 }

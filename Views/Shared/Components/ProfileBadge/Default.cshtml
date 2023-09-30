@@ -1,13 +1,16 @@
-﻿@model Squeezer.Models.User?
+﻿@model Squeezer.Models.User
 <span class="badge position-fixed top-0 start-0 p-4 m-3 shadow-lg" style="background-color:white; border-radius: 20px;">
+    @{
+        bool signedIn = ViewBag.HasSignedIn == true;
+    }
     <div class="flex-row">
         <div class="m-1">
             @{
                 <div class="dark-blue-ring">
                     @{
-                        string profileBackgroundStyleClass = Model is not null ? "btn-success" : "btn-light";
+                        string profileBackgroundStyleClass = signedIn ? "btn-success" : "btn-light";
                     <div style="border-style:solid; border-radius:50px;" class="p-3 btn m-1 @profileBackgroundStyleClass">
-                    @if (Model is not null)
+                    @if (signedIn)
                     {
                         <a style="text-decoration:none; color:white;" href="/dashboard">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
@@ -31,7 +34,7 @@
             }
         </div>
         @{
-            if(Model is not null)
+            if (signedIn)
             {
                 <div class="flex-column m-1">
                     <div class="p-1" style="font-size:15px; color:rebeccapurple">Signed As: @Model.Name</div>
