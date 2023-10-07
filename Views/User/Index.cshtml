@@ -16,11 +16,7 @@
             foreach(var url in Model.Urls)
             {
                 <tr>
-                    @{
-                        string originalUrlPresentation = url.OriginalUrl.Length >= 30 ?
-                            url.OriginalUrl.Substring(0, 30) + "..." : url.OriginalUrl; 
-                    }
-                    <td title="@url.OriginalUrl">@originalUrlPresentation</td>
+                    <td title="@url.OriginalUrl">@url.GetOriginalUrlPresentation()</td>
                     <td>@url.ShortenedUrl</td>
                     <td>@url.DateAdded</td>
                     <td><a class="btn btn-success p-1" target="_blank" href="@url.OriginalUrl">Visit the link</a></td>
