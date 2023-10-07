@@ -103,5 +103,12 @@ namespace Squeezer.Controllers
             }
             return users;
         }
+        [Route("/user/{id}")]
+        public IActionResult Info(int id)
+        {
+            var viewModel = new UserInfoViewModel
+                (UserManager.Get(id), UrlManager.GetByUser(id).ToList());
+            return View(viewModel);
+        }
     }
 }

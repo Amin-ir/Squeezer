@@ -1,0 +1,37 @@
+﻿@model Squeezer.ViewModels.UserInfoViewModel
+<div class="white-rounded-container flex-row" style="justify-content:space-around;">
+    <div><b>ID: </b>@Model.User.Id</div>
+    <div><b>Name: </b>@Model.User.Name</div>
+    <div><b>Date Registered: </b>@Model.User.DateRegistered</div>
+    <div><b>Email: </b>@Model.User.Email</div>
+</div>
+<table class="table table-responsive-md table-hover table-bordered caption-top">
+    <caption style="color:white; font-size:20px;">Count: @Model.Urls.Count</caption>
+    <thead>
+        <tr class="table-dark">
+            <th>Original URL</th>
+            <th>Shortened URL</th>
+            <th>Date Generated</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var url in Model.Urls)
+            {
+                <tr>
+                    <td title="@url.OriginalUrl" >@url.GetOriginalUrlPresentation()</td>
+                    <td>@url.ShortenedUrl</td>
+                    <td>@url.DateAdded</td>
+                    <td><a href="/@url.ShortenedUrl" class="btn btn-success" target="_blank" style="padding: 5px 15px 5px 15px;">Visit</a></td>
+                </tr>        
+            }
+        }
+    </tbody>
+</table>
+<style>
+    .white-rounded-container div{
+        font-size: 15px;
+        padding-right: 10px;
+    }
+</style>
