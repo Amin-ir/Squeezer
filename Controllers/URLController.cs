@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Squeezer.Services;
 using Squeezer.ViewModels;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Squeezer.Controllers
 {
-    [Route("/{controller}/{action}")]
+    [Route("/{controller}/{action}/{id?}")]
     [Authorize(Policy = "AdminOnly")]
     public class URLController : Controller
     {
@@ -13,10 +14,6 @@ namespace Squeezer.Controllers
         public URLController(URLManager urlManager)
         {
             URLManager = urlManager;
-        }
-        public IActionResult Index()
-        {
-            return View();
         }
         public IActionResult List()
         {
@@ -26,6 +23,11 @@ namespace Squeezer.Controllers
                     viewModel.Add
                         (new UrlUserPairViewModel(url.User is null ? "Anonymous" : url.User.Name, url)));
             return View(viewModel);
+        }
+        public IActionResult Delete([FromRoute]int id)
+        {
+            URLManager.Delete(id);
+            return RedirectToAction("Index", "User");
         }
     }
 }

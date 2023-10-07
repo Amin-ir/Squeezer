@@ -38,7 +38,8 @@ namespace Squeezer.Services
         {
             try
             {
-                db.Remove(urlId);
+                Url targetUrl = Get(urlId);
+                db.Remove(targetUrl);
                 db.SaveChanges();
                 return true;
             }
