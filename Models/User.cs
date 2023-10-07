@@ -18,6 +18,6 @@ namespace Squeezer.Models
         public string Password { get; set; }
         public UserRole UserRole { get; set; } = UserRole.TypicalUser;
         public DateTime DateRegistered { get; set; } = DateTime.Now;
-        public virtual List<Url> Urls { get; set; }
+        public virtual List<Url>? Urls { get; set; }
     }
 }
