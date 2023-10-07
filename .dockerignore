@@ -1,0 +1,19 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore project files
+*.user
+*.vs/
+
+# Ignore config files
+appsettings.json
+appsettings*.json
+
+# Ignore logs
+logs/
+
+# Ignore NuGet packages
+**/packages/*
+!**/packages/runtime.*
+!**/packages/microsoft.*/

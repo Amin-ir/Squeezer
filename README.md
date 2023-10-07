@@ -45,16 +45,17 @@ To run this project, you need to have the following installed on your machine:
 3. Build and run the Docker containers:
 
    ```bash
-   docker-compose up --build
+   docker build -t squeezer
+   docker run -it -p 5000:5234 squeezer
    ```
 
-4. Once the containers are up and running, you can access the URL shortener service at `http://localhost:5234`.
+4. Once the containers are up and running, you can access the URL shortener service at `http://localhost:5000`.
 
 ## Usage
 
 1. **Shorten a URL:**
 
-   - To shorten a URL, simply navigate to the web interface at `http://localhost:5234`.
+   - To shorten a URL, simply navigate to the web interface at `http://localhost:5000`.
    - You may remain anonymously or you can simply log in using your credentials, after signing up through the profile badge at the corner.
    - Enter the long URL you want to shorten and submit the form.
    - You will receive a shortened URL that you can share.
