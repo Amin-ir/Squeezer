@@ -1,5 +1,6 @@
 ﻿using Squeezer.Infrastructure;
 using Squeezer.Models;
+using Squeezer.ViewModels;
 
 namespace Squeezer.Services
 {

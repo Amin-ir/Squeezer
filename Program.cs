@@ -35,7 +35,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IAuthenticator, ClaimBasedAuthenticator>();
 
 builder.Services.AddDbContext<SqueezerDbContext>
-    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));
+    (options => options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));
 
 builder.Services.Configure<RouteOptions>
     (option => option.ConstraintMap.Add("shortUrlConstraint", typeof(ShortUrlRouteContstraint)));

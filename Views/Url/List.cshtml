@@ -1,0 +1,25 @@
+﻿@model List<Squeezer.ViewModels.UrlUserPairViewModel>
+<table class="table table-responsive-md table-hover table-bordered caption-top" >
+    <caption></caption>
+    <thead>
+        <tr class="table-dark">
+            <th>User Name</th>
+            <th>Date Generated</th>
+            <th>Original URL</th>
+            <th>Shortened URL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var urlViewModel in Model)
+            {
+                <tr>
+                    <td>@urlViewModel.UserName</td>
+                    <td>@urlViewModel.Url.DateAdded</td>
+                    <td title="@urlViewModel.Url.OriginalUrl">@urlViewModel.Url.GetOriginalUrlPresentation()</td>
+                    <td>@urlViewModel.Url.ShortenedUrl</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
