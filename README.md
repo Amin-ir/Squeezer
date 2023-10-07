@@ -10,7 +10,6 @@ Squeezer is a simple URL shortening project built with .NET Core that also incor
 
 - Generate short aliases for long URLs through MD5 Encryption & 62-Based Encoding
 - User registration and authentication
-- Custom short URLs based on available keywords
 - User dashboard to manage generated URLs
 - Usage analytics for shortened URLs
 - Claim-based authorization for protected actions
