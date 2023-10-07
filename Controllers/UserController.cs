@@ -104,6 +104,7 @@ namespace Squeezer.Controllers
             return users;
         }
         [Route("/user/{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Info(int id)
         {
             var viewModel = new UserInfoViewModel

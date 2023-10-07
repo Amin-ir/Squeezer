@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Squeezer.Services;
 using Squeezer.ViewModels;
 
 namespace Squeezer.Controllers
 {
     [Route("/{controller}/{action}")]
+    [Authorize(Policy = "AdminOnly")]
     public class URLController : Controller
     {
         URLManager URLManager;
