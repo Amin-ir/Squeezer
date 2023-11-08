@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using Squeezer.Models;
 using Squeezer.Services;
 using Squeezer.Utils;
@@ -82,11 +83,13 @@ namespace Squeezer.Controllers
             ViewBag.Errors = "Password or Email doesn't match";
             return View();
         }
+
         public IActionResult SignOut()
         {
             Authenticator.LogOut();
             return RedirectToAction("SignIn");
         }
+
         [Authorize(Policy = "AdminOnly")]
         public IActionResult List()
         {
@@ -103,6 +106,7 @@ namespace Squeezer.Controllers
             }
             return users;
         }
+
         [Route("/user/{id}")]
         [Authorize(Policy = "AdminOnly")]
         public IActionResult Info(int id)
@@ -110,6 +114,25 @@ namespace Squeezer.Controllers
             var viewModel = new UserInfoViewModel
                 (UserManager.Get(id), UrlManager.GetByUser(id).ToList());
             return View(viewModel);
+        }
+
+        [Route("/user/change-password")]
+        [Authorize(Policy = "UserAccessible")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Policy = "UserAccessible")]
+        public IActionResult ChangePassword(string newpass)
+        {
+            var succeeded = UserManager.ChangePassword(Authenticator.GetUserId(), newpass);
+            if (succeeded)
+                ViewBag.ResultMessage = "Login password changed successfully";
+            else 
+                ViewBag.ResultMessage = "An error occured during the request.";
+            return View();
         }
     }
 }

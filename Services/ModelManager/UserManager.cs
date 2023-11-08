@@ -49,5 +49,18 @@ namespace Squeezer.Services
         {
             return new User();
         }
+        public bool ChangePassword(int userId, string newPassword)
+        {
+            try
+            {
+                Get(userId).Password = Encryptor.EncryptToString(newPassword);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
