@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5234:5234"
+    depends_on:
+      - db
+    command: >
+      sh -c "dotnet tool install --global dotnet-ef --version 8.0.4 && dotnet ef database update"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__SqueezerDBConnection=Server=db,1433;User Id=sa;Password=uwprt7v4tgn02vjDpfoj93fj;Database=squeezerdb;Encrypt=false
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=uwprt7v4tgn02vjDpfoj93fj
+    volumes:
+      - sql-data:/var/opt/mssql
+    ports:
+      - "1433:1433"
+volumes:
+  sql-data:
