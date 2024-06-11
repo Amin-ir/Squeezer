@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Squeezer.Infrastructure;
 using Squeezer.Models;
 using Squeezer.Services;
+using Squeezer.Services.Builders;
+using Squeezer.Services.Directors;
 using Squeezer.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,9 +35,11 @@ builder.Services.AddTransient<URLManager>();
 builder.Services.AddTransient<UserManager>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IAuthenticator, ClaimBasedAuthenticator>();
+builder.Services.AddTransient<IUserBuilder, UserBuilder>();
+builder.Services.AddScoped<IUserDirector, UserDirector>();
 
 builder.Services.AddDbContext<SqueezerDbContext>
-    (options => options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDBConnection")));
+    (options => options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqueezerDB")));
 
 
 builder.Services.Configure<RouteOptions>
